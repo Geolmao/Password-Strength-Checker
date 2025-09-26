@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Password strength Checker";
+}
+<h2>Password Checker</h2>
+<form asp-action="Check" method = "post">
+    <div>
+        <label for="password">Enter Password:</label>
+        <input type="text" name="password" id="password" required/>
+    </div>
+    <div>
+        <button type = "submit" class="SubmitButton">Check Strength</button>
+    </div>
+</form>
+<hr />
+
+@if(ViewBag.strength != null)
+{
+    <div class="results-container" style="display:flex; gap:20px;">
+    
+        <div class="result" style="flex:1;">
+            <h3>Password Result</h3>
+            <p>Strength: @ViewBag.strength</p>
+            <p>Score: @ViewBag.score</p>
+        </div>
+
+        <div class="tips" style="flex:1; background-color:#1a017dc9; padding:10px; border-radius:5px;">
+            <h3>Recommendations</h3>
+            <ul>
+                @if(ViewBag.tips != null)
+                {
+                    foreach(var tip in ViewBag.tips)
+                    {
+                        <li>@tip</li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+}
